@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "cb9ddcf2-85fd-4115-aa50-89ed246df38e",
+		"name": "HL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11072341"
+	},
+	"item": [
+		{
+			"name": "Social Network API: register",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "myuser",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "mysecretpassword",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstname\": \"Иван\",\r\n  \"secondname\": \"Иванов\",\r\n  \"birthdate\": \"1990-01-01\",\r\n  \"city\": \"Москва\",\r\n  \"password\": \"mypassword\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Social Network API: login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "myuser",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "mysecretpassword",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"5b3fdafd-0721-4ece-8792-501e5473b7e8\",\"password\":\"mypassword\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Social Network API: user/get",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "myuser",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "mysecretpassword",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/user/get/5b3fdafd-0721-4ece-8792-501e5473b7e8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"get",
+						"5b3fdafd-0721-4ece-8792-501e5473b7e8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
