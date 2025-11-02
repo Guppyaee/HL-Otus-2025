@@ -28,8 +28,8 @@ def register():
     cur = conn.cursor()
     try:
         cur.execute(
-            "INSERT INTO users (id, firstname, secondname, birthdate, biography, city, password_hash) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-            (str(uuid.uuid4()), data['firstname'], data['secondname'], data['birthdate'], data.get('biography', ''), data['city'], hashed.decode('utf-8'))
+            "INSERT INTO users (id, firstname, secondname, birthdate, biography, interests, city, email, phone, password_hash) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+            (str(uuid.uuid4()), data['firstname'], data['secondname'], data['birthdate'], data.get('biography', ''), data.get('interests', ''), data['city'], data['email'], data['phone'], hashed.decode('utf-8'))
         )
         conn.commit()
     except Exception as e:
@@ -61,7 +61,7 @@ def login():
 def get_user(user_id):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT id, firstname, secondname, birthdate, biography, city FROM users WHERE id = %s", (user_id,))
+    cur.execute("SELECT id, firstname, secondname, birthdate, biography, interests, city, email, phone FROM users WHERE id = %s", (user_id,))
     row = cur.fetchone()
     cur.close()
     conn.close()
@@ -72,7 +72,10 @@ def get_user(user_id):
             'secondname': row[2],
             'birthdate': row[3].isoformat(),
             'biography': row[4],
-            'city': row[5]
+            'interests': row[5],
+            'city': row[6],
+            'email': row[7],
+            'phone': row[8]
         }
         return jsonify(user), 200
     return jsonify({'error': 'User not found'}), 404

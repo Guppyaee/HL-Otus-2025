@@ -6,8 +6,24 @@ CREATE TABLE users (
   secondname VARCHAR(100) NOT NULL,
   birthdate DATE NOT NULL,
   biography TEXT,
+  interests TEXT,
   city VARCHAR(100),
+  email VARCHAR(150),
+  phone VARCHAR(20),
   password_hash VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP DEFAULT now()
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE OR REPLACE FUNCTION update_users_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = CURRENT_TIMESTAMP;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_users_updated_at
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION update_users_updated_at();
